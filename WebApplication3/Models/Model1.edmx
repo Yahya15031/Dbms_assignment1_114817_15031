@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbUnversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="contact" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Course_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Course_Teacher" Type="varchar" MaxLength="50" />
+          <Property Name="Credit hours" Type="int" />
+        </EntityType>
+        <EntityType Name="registrations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Course_id" Type="int" />
+          <Property Name="student_id" Type="int" />
+          <Property Name="admin_id" Type="int" />
+          <Property Name="registration_date" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="70" />
+          <Property Name="contact" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__registrat__admin__48CFD27E">
+          <End Role="admin_" Type="Self.admin_" Multiplicity="0..1" />
+          <End Role="registrations" Type="Self.registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="registrations">
+              <PropertyRef Name="admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registrat__Cours__47DBAE45">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="registrations" Type="Self.registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="registrations">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registrat__stude__46E78A0C">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="registrations" Type="Self.registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="registrations">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbUnversityModelStoreContainer">
+          <EntitySet Name="admin_" EntityType="Self.admin_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registrations" EntityType="Self.registrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__registrat__admin__48CFD27E" Association="Self.FK__registrat__admin__48CFD27E">
+            <End Role="admin_" EntitySet="admin_" />
+            <End Role="registrations" EntitySet="registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registrat__Cours__47DBAE45" Association="Self.FK__registrat__Cours__47DBAE45">
+            <End Role="course" EntitySet="course" />
+            <End Role="registrations" EntitySet="registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registrat__stude__46E78A0C" Association="Self.FK__registrat__stude__46E78A0C">
+            <End Role="student" EntitySet="student" />
+            <End Role="registrations" EntitySet="registrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbUnversityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="registrations" Relationship="Self.FK__registrat__admin__48CFD27E" FromRole="admin_" ToRole="registrations" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Course_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Course_Teacher" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Credit_hours" Type="Int32" />
+          <NavigationProperty Name="registrations" Relationship="Self.FK__registrat__Cours__47DBAE45" FromRole="course" ToRole="registrations" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Course_id" Type="Int32" />
+          <Property Name="student_id" Type="Int32" />
+          <Property Name="admin_id" Type="Int32" />
+          <Property Name="registration_date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="admin_" Relationship="Self.FK__registrat__admin__48CFD27E" FromRole="registrations" ToRole="admin_" />
+          <NavigationProperty Name="course" Relationship="Self.FK__registrat__Cours__47DBAE45" FromRole="registrations" ToRole="course" />
+          <NavigationProperty Name="student" Relationship="Self.FK__registrat__stude__46E78A0C" FromRole="registrations" ToRole="student" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="registrations" Relationship="Self.FK__registrat__stude__46E78A0C" FromRole="student" ToRole="registrations" />
+        </EntityType>
+        <Association Name="FK__registrat__admin__48CFD27E">
+          <End Role="admin_" Type="Self.admin_" Multiplicity="0..1" />
+          <End Role="registrations" Type="Self.registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin_">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="registrations">
+              <PropertyRef Name="admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registrat__Cours__47DBAE45">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="registrations" Type="Self.registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="registrations">
+              <PropertyRef Name="Course_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__registrat__stude__46E78A0C">
+          <End Role="student" Type="Self.student" Multiplicity="0..1" />
+          <End Role="registrations" Type="Self.registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="registrations">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbUnversityEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin_" EntityType="Self.admin_" />
+          <EntitySet Name="courses" EntityType="Self.course" />
+          <EntitySet Name="registrations" EntityType="Self.registration" />
+          <EntitySet Name="students" EntityType="Self.student" />
+          <AssociationSet Name="FK__registrat__admin__48CFD27E" Association="Self.FK__registrat__admin__48CFD27E">
+            <End Role="admin_" EntitySet="admin_" />
+            <End Role="registrations" EntitySet="registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registrat__Cours__47DBAE45" Association="Self.FK__registrat__Cours__47DBAE45">
+            <End Role="course" EntitySet="courses" />
+            <End Role="registrations" EntitySet="registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__registrat__stude__46E78A0C" Association="Self.FK__registrat__stude__46E78A0C">
+            <End Role="student" EntitySet="students" />
+            <End Role="registrations" EntitySet="registrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbUnversityModelStoreContainer" CdmEntityContainer="dbUnversityEntities">
+          <EntitySetMapping Name="admin_">
+            <EntityTypeMapping TypeName="dbUnversityModel.admin_">
+              <MappingFragment StoreEntitySet="admin_">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="dbUnversityModel.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+                <ScalarProperty Name="Course_Name" ColumnName="Course_Name" />
+                <ScalarProperty Name="Course_Teacher" ColumnName="Course_Teacher" />
+                <ScalarProperty Name="Credit_hours" ColumnName="Credit hours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registrations">
+            <EntityTypeMapping TypeName="dbUnversityModel.registration">
+              <MappingFragment StoreEntitySet="registrations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Course_id" ColumnName="Course_id" />
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="dbUnversityModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

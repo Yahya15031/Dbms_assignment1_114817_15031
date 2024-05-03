@@ -1,0 +1,45 @@
+﻿@model WebApplication3.Models.course
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+<div style="margin-top:100px">
+    <h2>Details</h2>
+    <hr />
+    <h4>course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course_Teacher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course_Teacher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Credit_hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Credit_hours)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Course_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

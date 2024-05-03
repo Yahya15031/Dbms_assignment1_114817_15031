@@ -1,0 +1,51 @@
+﻿@model WebApplication3.Models.registration
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2 style="margin-top:100px">Details</h2>
+
+<div>
+    <h4>registration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.registration_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.admin_.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.admin_.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.course.Course_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.course.Course_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.student.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.student.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
